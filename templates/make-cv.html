@@ -1,0 +1,11 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "bootstrap/base.html" %}
+{% include "h.html"%}
+{% block content %}
+
+
+  <div class="container my-auto">
+    {{ wtf.quick_form(form) }}
+      </div>
+{% endblock %}
+

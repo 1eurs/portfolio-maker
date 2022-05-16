@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home</title>
+    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets/fonts/simple-line-icons.min.css">
+</head>
+
+<body id="page-top">
+<header class="d-flex masthead" style="background-image:url('assets/img/bg-masthead.jpg');">
+    <div class="container my-auto text-center">
+        <h1 class="mb-1">Portfoliо Maker</h1>
+        <h3 class="mb-5"><em>Make Portfoliо now :)</em></h3>
+        {%if not current_user.is_authenticated:%}
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="{{url_for('register')}}">Start here!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="{{url_for('login')}}">login!</a>
+        {%else%}
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="{{url_for('logout')}}">logout!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button"
+           href="{{url_for('edit', id=current_user.id)}}">edit your portfolio!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button"
+           href="{{url_for('add_new_project',id=current_user.id)}}">add new projects!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button"
+           href="{{url_for('add_new_skills',id=current_user.id)}}">add new skills!</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" role="button"
+           href="{{url_for('portfolio',name=current_user.name)}}">look at your portfolio!</a>
+        {%endif%}
+
+        <div class="overlay"></div>
+    </div>
+</header>
+</body>
+
+</html>

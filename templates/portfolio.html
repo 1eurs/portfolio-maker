@@ -1,0 +1,95 @@
+{% include 'header.html' %}
+    <main>
+      <!-- About -->
+      <div class="about center">
+        <h1>Hi, I am <span class="about__name">{{user.name}}</span></h1>
+        <h2 class="about__role">{{resume.role}}</h2>
+        <p class="about__desc">{{resume.about}}</p>
+
+        <div class="about__contact center">
+          <a href="{{user.resume}}">
+            <span class="btn btn--outline">Resume</span>
+          </a>
+
+          <a
+            href="{{user.github}}"
+            aria-label="github"
+            class="link link--icon">
+            <i aria-hidden="true" class="fab fa-github"></i>
+          </a>
+
+          <a
+            href="{{user.linkedin}}"
+            aria-label="linkedin"
+            class="link link--icon"
+          >
+            <i aria-hidden="true" class="fab fa-linkedin"></i>
+          </a>
+
+
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <h2 class="section__title">Projects</h2>
+
+        <div class="projects__grid">
+          {%for project in projects:%}
+          <div class="project">
+            <h3>{{project.project_name}}</h3>
+            <p class="project__description">
+              {{project.description}}
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">{{project.tools}}</li>
+            </ul>
+            {%if not current_user.is_authenticated:%}
+            <a href="{{project.github}}" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i></a>
+            <a href="{{project.link}}" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+            {%else%}
+            <a href="{{project.github}}" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i></a>
+            <a href="{{project.link}}" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+<!--            logedin-->
+            <a href="{{url_for('edit_project',id=project.id)}}" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+            <a href="{{url_for('delete_project',id=project.id)}}" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
+            </a>
+        {%endif%}
+
+          </div>
+          {%endfor%}
+
+          </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="section skills" id="skills">
+        <h2 class="section__title">Skills</h2>
+        <ul class="skills__list">
+          {%for skill in skills:%}
+          {%for ski in skill.skill.split("-"):%}
+          <li class="skills__list-item btn btn--plain">{{ski}}</li>
+            {%endfor%}
+          {%endfor%}
+        </ul>
+
+      </section>
+
+      <!-- Contact -->
+      <section class="section contact center" id="contact">
+        <h2 class="section__title">Contact</h2>
+        <a href="mailto:{{user.email}}">
+          <span class="btn btn--outline">Email me</span>
+        </a>
+      </section>
+    </main>
+
+{% include 'footer.html' %}
