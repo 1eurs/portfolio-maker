@@ -306,4 +306,4 @@ def delete_project():
     return redirect(url_for('portfolio', name=user.name))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=Flase,host='0.0.0.0')
